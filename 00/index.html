@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 id="app">
+        {{name | uppercase}}
+        <br>
+        {{message | uppercase}}
+        <br>
+        I love Coding {{b}} times
+        <br>
+        {{$data|json}}
+        <br>
+        <input v-model="id">
+        <input v-model="b">
+    </h1>
+    <div v-if="app2boolean" v-html="id == 2 ? messsge2: messsge3" id="app2">
+
+    </div>
+    <div id="app3">
+        <ul>
+            <li><input v-model="firstname"></li>
+            <li><input v-model="lastname"></li>
+            <li><input v-model="name"></li>
+        </ul>
+    </div>
+
+    <!---------------------------class and style with vuejs------------------------------------->
+    <div id="app4">
+        <div :class="[classA , {'classb' : true, 'classc' : false}, classObject ]">
+            <p>
+                some Content
+            </p>
+        </div>
+        <div :style="styleObject">
+            <p>
+                another content
+            </p>
+        </div>
+        <ul>
+            <li  v-for="listItem in list" v-show="listItem.isActive">
+                {{listItem.name}}
+            </li>
+        </ul>
+    </div>
+    <!--events and its inputs-->
+    <div id="app5">
+        <!--only call function-->
+        <a href="https://github.com/vuejs/vue-router/issues/800" v-on:click="function1">only call function</a>
+        <br>
+        <!--call function and prevent default with out input-->
+        <a href="https://github.com/vuejs/vue-router/issues/800" v-on:click="function2">call function and prevent default with out input</a>
+        <br>
+        <!--call function and input custom inuput not evevt! event can't be reachable-->
+        <a href="https://github.com/vuejs/vue-router/issues/800" v-on:click ="function3('123')">call function and input custom inuput not evevt! event can't be reachable</a>
+        <br>
+        <!--call function with custom input and event therefor event is reachable-->
+        <a href="https://github.com/vuejs/vue-router/issues/800" v-on:click.prevent="function4('345')">call function with custom input and event therefor event is reachable</a>
+        <br>
+        <!--prevet default shortcut-->
+        <a href="https://github.com/vuejs/vue-router/issues/800" v-on:click.prevent="function5">prevet default shortcut</a>
+        <br>
+    </div>
+    <script src="../vue.min.js"></script>
+    <script>
+
+        Vue.filter('uppercase',function(value){
+            return value.toUpperCase();
+        });
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'you loaded this page on ' + new Date().toLocaleString(),
+                name: "iman jafari",
+                id: 2
+            },
+            computed: {
+                b: {
+                    get: function () {
+                        return this.id * 4
+                    },
+                    set: function (value) {
+                        this.id = value/4
+                    }
+                }
+            }
+
+        });
+        app2boolean  = true;
+        var app2 = new Vue(
+                {
+                    el: "#app2",
+                    data: {
+                        messsge2: "<ul><li>list item</li></ul>",
+                        messsge3: "<b>bold element</b>",
+                        id: 2
+                    }
+                }
+        );
+        var app3 = new Vue(
+                {
+                    el: "#app3",
+                    data: {
+                        firstname: "iman",
+                        lastname: "jafari",
+                        name: "iman jafari"
+                    },
+                    watch:{
+                        firstname: function (value) {
+                            this.name = value + ' ' + this.lastname
+                        },
+                        lastname: function (value) {
+                            this.name = this.firstname + ' ' + value
+
+                        }
+                    }
+
+                }
+        );
+        var app4 = new Vue(
+                {
+                    el: "#app4",
+                    data: {
+                        classObject:{
+                            'b' : true,
+                            'c' : false
+                        },
+                        classA: 'A',
+                        styleObject:{
+                            'color': 'red',
+                            'padding': '20px'
+                        },
+                        list:[
+                            {
+                                    name: "iman",
+                                    isActive: true
+                            },
+                            {
+                                    name: "amir",
+                                    isActive: true
+                            },
+                            {
+                                    name: "ahmad",
+                                    isActive: false
+                            }
+                        ]
+
+                    }
+                }
+        );
+        var app5 = new Vue(
+                {
+                    el: "#app5",
+                    data:{
+                        someData: "ahmad"
+                    },
+                    methods:{
+                        function1: function () {
+                            alert("only call function" + this.someData);
+                        },
+                        function2: function (event) {
+                            event.preventDefault();
+                            alert("call function and prevent default with out input");
+                        },
+                        function3: function (value, event) {
+                            return function(value, event){
+                                alert("call function and input custom inuput not evevt! event can't be reachable, this value is " + value);
+                                console.log(event);
+                            }
+                        },
+                        function4: function (value, event) {
+                            return function(value, event){
+                                console.log("!")
+                                //event.preventDefault();
+                                alert("call function with custom input and event therefor event is reachable, this value is " + value);
+                                console.log(event);
+                            }
+
+                        },
+                        function5: function () {
+                            alert("prevet default shortcut");
+                        }
+                    }
+
+                }
+        )
+
+    </script>
+</body>
+</html>
