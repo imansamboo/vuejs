@@ -1,0 +1,42 @@
+<html><head>
+    <meta charset="utf-8">
+    <title>VueJs Components</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head><body>
+<!-- Your Code -->
+<div id="app">
+    <div class="container">
+        <div class="row">
+            <div class="col-l-12">
+                <h2>{{'ataD esruoC' | reverseLetters}}</h2>
+                <div class="form-group">
+                    <input type="text" v-model="searchString" class="form-control">
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th @click="sortBy('title')">Course Name</th>
+                            <th @click="sortBy('difficulty')">Difficulty</th>
+                            <th @click="sortBy('time')">Time</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="course in courses | orderBy sortValue reverse <!--| isComplete--> | filterBy searchString searchFields" >
+                            <th>{{$index + 1}}</th>
+                            <td>{{course.title}}</td>
+                            <td>{{course.difficulty}} </td>
+                            <td>{{course.time }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.js"></script>
+<script src="filter.js"></script>
+
+</body></html>
