@@ -1,0 +1,35 @@
+<html><head>
+    <meta charset="utf-8">
+    <title>Vue</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head><body id="app">
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <component :is="component"></component>
+
+            <ul>
+                <li>
+                    <a href="#" @click.prevent="changeComponent('homepage')">Home</a>
+                </li>
+                <li>
+                    <a href="#" @click.prevent="changeComponent('aboutus')">Series</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<template id="homepage"><h2>Home Page</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, accusantium, assumenda excepturi exercitationem nam odit quaerat, quasi qui quidem recusandae repudiandae saepe totam veniam vero voluptatem. Adipisci nisi repudiandae voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque aut consequuntur facere id laboriosam, optio quasi tempore vel. Animi aperiam delectus dignissimos dolore doloremque dolorum minus quia sint unde vero?</p></template>
+
+<template id="aboutus">
+    <h2>Series Page</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad autem beatae deleniti dignissimos eveniet, exercitationem explicabo fugiat in incidunt laudantium modi nihil optio quo repudiandae, sapiente sit totam ut velit?</p>
+</template>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.js"></script>
+<script src="chang.js"></script>
+
+</body></html>
