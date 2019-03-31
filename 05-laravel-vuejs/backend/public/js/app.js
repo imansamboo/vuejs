@@ -38,11 +38,7 @@ app = new Vue(
         methods: {
             pushEvent: function () {
                 $.post("api/events",
-                    {
-                        name : this.event.name,
-                        description : this.event.description,
-                        date : this.event.date
-                    }
+                    this.event
                 ).done(function () {
                     if(this.event.name)
                         this.events.push(this.event);

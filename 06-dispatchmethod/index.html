@@ -1,0 +1,21 @@
+<html><head>
+    <meta charset="utf-8">
+    <title>Vue</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body id="app">
+
+<div id="events">
+    <p>{{messages | json}}</p>
+    <add @add-this="addMessage"></add>
+</div>
+
+<template id="addForm" >
+    <input type="text" v-model="msg">
+    <!--<button @click="addMsg">send</button>--><!--for method 1 (event handler)-->
+    <button @click="addMsg">send</button>
+</template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.js"></script>
+<script src="dispatch.js"></script>
+
+</body></html>
